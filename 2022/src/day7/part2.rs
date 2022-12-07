@@ -1,9 +1,9 @@
 //! https://adventofcode.com/2022/day/7#part2
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
 
 #[cfg_attr(feature = "cargo-aoc", aoc(day7, part2))]
 pub fn run(input: &str) -> i64 {
-    let mut dirs: HashMap<_, i64> = HashMap::new();
+    let mut dirs: FxHashMap<_, i64> = FxHashMap::default();
     let mut path = vec![];
     let mut free = 70000000;
     for command in input.trim()[2..].split("\n$ ") {
