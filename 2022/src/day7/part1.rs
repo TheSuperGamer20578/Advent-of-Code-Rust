@@ -13,11 +13,9 @@ pub fn run(input: &str) -> i64 {
             ("cd", dir) => {path.push(dir);},
             ("ls", _) => {
                 for file in output.split('\n') {
-                    let (size, _) = file.split_once(' ').unwrap();
-                    if size != "dir" {
-                        for i in 0..path.len() {
-                            (*dirs.entry(path[..=i].join("/")).or_default()) += size.parse::<i64>().unwrap();
-                        }
+                    let Ok(size) = file.split_once(' ').unwrap().0.parse::<i64>() else {continue;};
+                    for i in 0..path.len() {
+                        (*dirs.entry(path[..=i].join("/")).or_default()) += size;
                     }
                 }
             }
